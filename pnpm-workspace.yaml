@@ -1,0 +1,4 @@
+packages:
+  - 'packages/*'
+  - 'examples/marketplace-demo'
+  - 'examples/marketplace-demo/services/*'
