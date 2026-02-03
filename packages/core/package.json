@@ -1,0 +1,36 @@
+{
+    "name": "@kaspa-agent-pay/core",
+    "version": "0.1.0",
+    "type": "module",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "types": "./dist/index.d.ts"
+        }
+    },
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc --watch",
+        "clean": "rm -rf dist",
+        "test": "vitest run",
+        "test:watch": "vitest"
+    },
+    "dependencies": {
+        "@jest/globals": "^30.2.0",
+        "@kaspa/core-lib": "^1.6.5",
+        "@kaspa/wallet": "^1.4.27",
+        "@kasplex/kiwi": "^1.0.11",
+        "axios": "^1.13.5",
+        "secp256k1": "^5.0.0",
+        "ws": "^8.16.0"
+    },
+    "devDependencies": {
+        "@types/node": "^20.11.0",
+        "@types/secp256k1": "^4.0.6",
+        "@types/ws": "^8.5.10",
+        "typescript": "^5.3.3",
+        "vitest": "^4.0.18"
+    }
+}
