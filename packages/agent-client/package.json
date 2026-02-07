@@ -1,0 +1,25 @@
+{
+    "name": "@kaspa-agent-pay/agent-client",
+    "version": "0.1.0",
+    "type": "module",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "types": "./dist/index.d.ts"
+        }
+    },
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc --watch",
+        "clean": "rm -rf dist"
+    },
+    "dependencies": {
+        "@kaspa-agent-pay/core": "workspace:*"
+    },
+    "devDependencies": {
+        "@types/node": "^20.11.0",
+        "typescript": "^5.3.3"
+    }
+}
