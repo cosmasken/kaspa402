@@ -1,0 +1,31 @@
+{
+    "name": "@kaspa-agent-pay/service-agent",
+    "version": "0.1.0",
+    "type": "module",
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
+    "exports": {
+        ".": {
+            "import": "./dist/index.js",
+            "types": "./dist/index.d.ts"
+        }
+    },
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc --watch",
+        "clean": "rm -rf dist",
+        "test": "vitest run",
+        "test:watch": "vitest"
+    },
+    "dependencies": {
+        "@kaspa-agent-pay/core": "workspace:*",
+        "@kaspa-agent-pay/agent-client": "workspace:*",
+        "fastify": "^4.25.2",
+        "dotenv": "^16.3.1"
+    },
+    "devDependencies": {
+        "@types/node": "^20.11.0",
+        "typescript": "^5.3.3",
+        "vitest": "^4.0.18"
+    }
+}
