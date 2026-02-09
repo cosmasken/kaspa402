@@ -1,0 +1,122 @@
+[
+  {
+    "id": "svc_4b45410f87f2ec816cf794391838e99b",
+    "name": "Data Processor",
+    "description": "Transforms and processes data",
+    "endpoint": "http://0.0.0.0:3001/api/service",
+    "capabilities": [
+      "data-processing"
+    ],
+    "pricing": {
+      "type": "fixed",
+      "baseAmount": "1.0"
+    },
+    "walletAddress": "kaspatest:qprnyvvlh3udqd2qrfgnmy30mcede99fdksmlu60r2wdtyxph2npwwzgk8djd",
+    "healthCheckEndpoint": "/health",
+    "status": "active",
+    "registeredAt": "2026-02-15T13:54:49.516Z",
+    "lastHeartbeat": "2026-02-15T15:22:18.869Z",
+    "metrics": {
+      "totalRequests": 7,
+      "successfulRequests": 7,
+      "failedRequests": 0,
+      "averageResponseTimeMs": 739,
+      "successRate": 1
+    }
+  },
+  {
+    "id": "svc_f1b772d16c316d3d5fe200243ffe3db4",
+    "name": "Validator",
+    "description": "Validates data against schemas and rules",
+    "endpoint": "http://0.0.0.0:3002/api/service",
+    "capabilities": [
+      "data-validation"
+    ],
+    "pricing": {
+      "type": "outcome-based",
+      "baseAmount": "5.0"
+    },
+    "walletAddress": "kaspatest:qqp4wv0v3ll0yndn5tvfg8nnmarrakgfu8l9y4ve0llhfn3t4v7256nnqe2vj",
+    "healthCheckEndpoint": "/health",
+    "status": "active",
+    "registeredAt": "2026-02-15T13:54:51.808Z",
+    "lastHeartbeat": "2026-02-15T15:01:39.817Z",
+    "metrics": {
+      "totalRequests": 5,
+      "successfulRequests": 0,
+      "failedRequests": 5,
+      "averageResponseTimeMs": 624,
+      "successRate": 0
+    }
+  },
+  {
+    "id": "svc_eeed9a703ec6bd8281a5c4977a949891",
+    "name": "Analyzer",
+    "description": "Performs statistical analysis and insights generation",
+    "endpoint": "http://0.0.0.0:3004/api/service",
+    "capabilities": [
+      "data-analysis"
+    ],
+    "pricing": {
+      "type": "tiered",
+      "tiers": [
+        {
+          "name": "basic",
+          "amount": "2.0",
+          "features": [
+            "Basic statistics",
+            "Simple trends"
+          ]
+        },
+        {
+          "name": "advanced",
+          "amount": "5.0",
+          "features": [
+            "Advanced statistics",
+            "Linear regression",
+            "Anomaly detection",
+            "Predictions"
+          ]
+        }
+      ]
+    },
+    "walletAddress": "kaspatest:qrwtcz9fnq7rzqtyqyvht5utxaxkjjetggjjd73ln3le4ufeecqdzwuxfwujm",
+    "healthCheckEndpoint": "/health",
+    "status": "active",
+    "registeredAt": "2026-02-15T13:54:57.302Z",
+    "lastHeartbeat": "2026-02-15T15:01:46.102Z",
+    "metrics": {
+      "totalRequests": 4,
+      "successfulRequests": 4,
+      "failedRequests": 0,
+      "averageResponseTimeMs": 1841.5,
+      "successRate": 1
+    }
+  },
+  {
+    "id": "svc_b80a2afba824f8e6a7cf5d62181b1d37",
+    "name": "Storage",
+    "description": "Persists data with TTL support",
+    "endpoint": "http://0.0.0.0:3003/api/service",
+    "capabilities": [
+      "data-storage"
+    ],
+    "pricing": {
+      "type": "usage-based",
+      "usageMetric": "per_kb",
+      "usageRate": "1.0"
+    },
+    "walletAddress": "kaspatest:qpkm7qmwrhputsy2sw77ckxvsrecddu3sl6ns9yh7xq8uv4m8pszsvtgp5jvp",
+    "healthCheckEndpoint": "/health",
+    "status": "active",
+    "registeredAt": "2026-02-15T13:54:58.197Z",
+    "lastHeartbeat": "2026-02-15T15:01:43.133Z",
+    "metrics": {
+      "totalRequests": 0,
+      "successfulRequests": 0,
+      "failedRequests": 0,
+      "averageResponseTimeMs": 0,
+      "successRate": 0
+    }
+  }
+]
