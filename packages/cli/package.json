@@ -1,0 +1,25 @@
+{
+    "name": "@kaspa-agent-pay/cli",
+    "version": "0.1.0",
+    "type": "module",
+    "bin": {
+        "kaspa-pay": "./dist/index.js"
+    },
+    "scripts": {
+        "build": "tsc",
+        "dev": "tsc --watch",
+        "clean": "rm -rf dist"
+    },
+    "dependencies": {
+        "@kaspa-agent-pay/core": "workspace:*",
+        "@kaspa-agent-pay/agent-client": "workspace:*",
+        "commander": "^11.1.0",
+        "dotenv": "^16.4.1",
+        "chalk": "^5.3.0",
+        "ora": "^8.0.1"
+    },
+    "devDependencies": {
+        "@types/node": "^20.11.0",
+        "typescript": "^5.3.3"
+    }
+}
