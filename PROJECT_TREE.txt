@@ -1,0 +1,54 @@
+kaspa-agent-pay/
+│
+├── 📦 PACKAGES (5)
+│   ├── core/                    # Shared utilities & blockchain integration
+│   │   ├── src/
+│   │   │   ├── types.ts        # Payment protocol types
+│   │   │   ├── kaspa-tx.ts     # Transaction handling
+│   │   │   ├── kaspa-rpc.ts    # RPC client
+│   │   │   ├── crypto.ts       # Cryptographic operations (secp256k1)
+│   │   │   ├── storage.ts      # Payment tracking
+│   │   │   ├── metrics.ts      # Performance monitoring
+│   │   │   └── index.ts
+│   │   └── package.json
+│   │
+│   ├── agent-client/            # Smart HTTP client for agents
+│   │   ├── src/
+│   │   │   ├── AgentClient.ts  # Main client with auto-payment
+│   │   │   └── index.ts
+│   │   └── package.json
+│   │
+│   ├── service-agent/           # Paid service implementation (Server)
+│   │   ├── src/
+│   │   │   ├── ServiceAgent.ts # Base class for service agents
+│   │   │   └── index.ts
+│   │   └── package.json
+│   │
+│   ├── service-registry/        # Service Discovery & Verification
+│   │   ├── src/
+│   │   │   └── index.ts        # Registry API
+│   │   └── package.json
+│   │
+│   └── cli/                     # Command-line tool
+│       ├── src/
+│       │   └── index.ts        # CLI commands
+│       ├── package.json
+│       └── README.md
+│
+├── 📚 EXAMPLES (1)
+│   ├── marketplace-demo/        # Complete marketplace with agents
+│   │   ├── src/index.ts
+│   │   └── package.json
+│   │
+│
+├── ⚙️ CONFIGURATION
+│   ├── pnpm-workspace.yaml      # Monorepo config
+│   ├── tsconfig.json            # TypeScript config
+│   ├── package.json             # Root package
+│   ├── .env.example             # Environment template
+│   └── .gitignore               # Git ignore rules
+│
+└── 📊 PROJECT STATS
+    ├── 5 packages with source code
+    ├── 1 comprehensive example
+    ├── 1 CLI tool
