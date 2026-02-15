@@ -1,121 +1,131 @@
-# Getting Started with Kaspa Agent Pay
+# Getting Started with Kaspa402
 
 ## 🚀 Quick Start (5 Minutes)
 
 ### Step 1: Install
 
 ```bash
-git clone <repo-url>
-cd kaspa-agent-pay
+git clone https://github.com/cosmasken/kaspa402.git
+cd kaspa402
 pnpm install
 pnpm build
-cp .env.example .env
 ```
 
 This will:
 - ✅ Install all dependencies
 - ✅ Build all packages in correct order
-- ✅ Create `.env` file
+- ✅ Set up the project structure
 
-### Step 2: Configure
+### Step 2: Run the Demo
 
-Edit `.env` with your Kaspa testnet credentials:
-
-```env
-PRIVATE_KEY_WIF=your_testnet_private_key
-SERVER_RECIPIENT_ADDRESS=kaspatest:qr...your_address
-KASPA_NETWORK=testnet
-KASPA_RPC_URL=https://api-testnet.kaspa.org
-```
-
-**Get testnet KAS:** https://faucet.kaspanet.io
-
-### Step 3: Run
-
-**Terminal 1 - Start services:**
-```bash
-# Start the service registry
-cd packages/service-registry
-pnpm start
-# (In another terminal) Start the service agent
-cd packages/service-agent
-pnpm start
-```
-
-**Terminal 2 - Run demo:**
 ```bash
 cd examples/marketplace-demo
+
+# Start all services (registry + 4 agents)
+./scripts/start-all.sh
+```
+
+[![asciicast](https://asciinema.org/a/ZgRtgzMe2hycUEHO.svg)](https://asciinema.org/a/ZgRtgzMe2hycUEHO)
+
+```bash
+# Run the autonomous payment demo
 pnpm start
 ```
 
-You should see the agent automatically pay for and receive a service!
+[![asciicast](https://asciinema.org/a/kgm0LGQHL5NTZhIW.svg)](https://asciinema.org/a/kgm0LGQHL5NTZhIW)
+
+**First-time users:** The demo automatically detects if funding is needed and shows:
+- Your wallet address to fund
+- Exact amount needed (~50 KAS recommended)
+- Link to testnet faucet: https://faucet.kaspanet.io/
+
+### Step 3: Watch the Magic
+
+You'll see autonomous agents:
+1. **Discover services** automatically
+2. **Negotiate payments** via HTTP 402
+3. **Execute Kaspa transactions** in real-time
+4. **Chain multiple services** together
+5. **Complete in seconds** with instant settlement
 
 ---
 
-## 📚 What Just Happened?
+## 🎯 What Just Happened?
 
-1. **Agent made a request** to a paid service
-2. **Received 402** Payment Required response
-3. **Signed a transaction** with real cryptography
-4. **Broadcast to Kaspa** testnet
-5. **Waited for confirmation**
-6. **Retried with proof** of payment
-7. **Received the service** result
+The demo showcases a **Customer Data Enrichment Pipeline** where agents:
+
+1. **Data Processor** → Transforms customer data (1 KAS)
+2. **Validator** → Validates email addresses (5 KAS, outcome-based)
+3. **Analyzer** → Generates statistical insights (20 KAS, tiered pricing)
+
+All payments happen **autonomously** using Kaspa's millisecond blockchain!
 
 ---
 
-## 🎯 Next Steps
+## 🔧 Service Management
 
-### Try The Demo
-
-**Marketplace Demo:**
+### Check Services
 ```bash
-cd examples/marketplace-demo
-pnpm start
+./scripts/check-services.sh
 ```
 
-### Use the CLI Tool
+[![asciicast](https://asciinema.org/a/blFcmz5odSWfMi8j.svg)](https://asciinema.org/a/blFcmz5odSWfMi8j)
 
+### Stop Services
 ```bash
-cd packages/cli
-
-# Check balance
-node dist/index.js balance --key $PRIVATE_KEY_WIF
-
-# Test payment
-node dist/index.js test-payment --url http://localhost:3000/api/task
-
-# Verify transaction
-node dist/index.js verify --txid TRANSACTION_ID
-
-# View metrics
-node dist/index.js metrics
+./scripts/stop-all.sh
 ```
 
-### Build Your Own Service
+[![asciicast](https://asciinema.org/a/zXKLOXVOTKO1IADY.svg)](https://asciinema.org/a/zXKLOXVOTKO1IADY)
+
+### View Logs
+```bash
+tail -f logs/registry.log
+tail -f logs/data-processor.log
+```
+
+---
+
+## 🏗️ Architecture Overview
+
+```
+Client → API (402) → Kaspa Payment → Kaspa Network → Verifier → API Response
+```
+
+**Key Components:**
+- **Agent Client**: Auto-handles 402 responses with Kaspa payments
+- **Service Registry**: Decentralized service discovery
+- **Payment Verifier**: Cryptographic proof of payment
+- **Multiple Pricing Models**: Fixed, usage-based, outcome-based, tiered
+
+---
+
+## 🛠️ Build Your Own Service
+
+Create a new paid service:
 
 ```typescript
 import { ServiceAgent } from '@kaspa-agent-pay/service-agent';
 
 class MyService extends ServiceAgent {
     protected async processRequest(input: any): Promise<any> {
+        // Your service logic here
         return { result: 'processed', data: input };
     }
 
     protected validateInput(input: any): boolean {
-        return true;
+        return input && typeof input === 'object';
     }
 }
 
 const service = new MyService({
-    name: 'My Service',
-    description: 'A simple paid service',
-    capabilities: ['data-processing'],
-    pricing: { type: 'fixed', baseAmount: '1.0' },
-    port: 3000,
+    name: 'My Custom Service',
+    description: 'A specialized paid service',
+    capabilities: ['custom-processing'],
+    pricing: { type: 'fixed', baseAmount: '2.0' },
+    port: 3005,
     registryUrl: 'http://localhost:5000',
-    network: 'testnet',
-    rpcUrl: 'https://api-testnet.kaspa.org'
+    network: 'testnet'
 });
 
 service.start();
@@ -123,147 +133,84 @@ service.start();
 
 ---
 
-## 📖 Documentation
+## 📦 Package Structure
 
-- **[README.md](./README.md)** - Complete documentation
-- **[QUICKSTART.md](./docs/QUICKSTART.md)** - Detailed setup guide
-- **[BUILD_ORDER.md](./BUILD_ORDER.md)** - Build instructions
-- **[TROUBLESHOOTING.md](./TROUBLESHOOTING.md)** - Common issues
-- **[FEATURES.md](./FEATURES.md)** - Feature list
-- **[architecture.md](./docs/architecture.md)** - System design
+| Package | Purpose |
+|---------|---------|
+| `@kaspa-agent-pay/core` | Kaspa integration & utilities |
+| `@kaspa-agent-pay/agent-client` | Smart HTTP client with auto-payments |
+| `@kaspa-agent-pay/service-agent` | Paid service implementation |
+| `@kaspa-agent-pay/service-registry` | Service discovery |
+| `@kaspa-agent-pay/cli` | Command-line tools |
 
 ---
 
-## 🐛 Having Issues?
+## 🐛 Troubleshooting
 
-### Build Errors
+### Services won't start
+```bash
+# Check if ports are in use
+lsof -i :5000,:3001,:3002,:3003,:3004
 
+# Kill existing processes
+./scripts/stop-all.sh
+```
+
+### Demo fails with insufficient funds
+The demo automatically detects this and provides funding instructions. Simply:
+1. Copy the displayed wallet address
+2. Get testnet KAS from https://faucet.kaspanet.io/
+3. Wait ~2 seconds for confirmation
+4. Demo continues automatically
+
+### Build errors
 ```bash
 # Clean and rebuild
-rm -rf node_modules
+pnpm clean
 pnpm install
 pnpm build
 ```
 
-### Can't Find Module
+---
 
-```bash
-# Rebuild packages
-pnpm -r build
-```
+## 🎯 Next Steps
 
-### Service Won't Start
+### Explore the Code
+- **Core UTXO Management**: `packages/core/src/utxo/`
+- **Agent Implementation**: `packages/agent-client/src/AgentClient.ts`
+- **Service Framework**: `packages/service-agent/src/ServiceAgent.ts`
+- **Demo Orchestrator**: `examples/marketplace-demo/src/orchestrator.ts`
 
-```bash
-# Check if built
-ls packages/service-agent/dist
+### Extend the Demo
+- Add new service types
+- Implement custom pricing models
+- Create service chains
+- Build a frontend dashboard
 
-# Rebuild if needed
-cd packages/service-agent
-pnpm build
-```
-
-See [TROUBLESHOOTING.md](./TROUBLESHOOTING.md) for more help.
+### Deploy to Production
+- Switch to Kaspa mainnet
+- Set up monitoring
+- Implement rate limiting
+- Add authentication
 
 ---
 
-## 🎓 Learn More
+## 🏆 Why Kaspa?
 
-### Architecture
+Unlike other blockchains with multi-minute confirmations, Kaspa enables:
+- **Millisecond payments** between services
+- **Instant settlement** without waiting
+- **Practical microtransactions** with minimal fees
+- **Trustless verification** with PoW security
 
-```
-Agent → 402 Response → Sign TX → Broadcast → Confirm → Retry → Success
-```
-
-### Key Components
-
-- **Core**: Blockchain integration, crypto, RPC
-- **Agent Client**: Automatic payment handling
-- **Server**: Paid service implementation
-- **Facilitator**: Payment verification
-- **CLI**: Testing tool
-
-### Features
-
-✅ Real secp256k1 cryptography
-✅ Full Kaspa RPC integration
-✅ Automatic 402 handling
-✅ Replay attack prevention
-✅ Rate limiting
-✅ Metrics collection
-✅ WebSocket support
-✅ Storage abstraction
+Perfect for **real-time agent-to-agent commerce**!
 
 ---
 
-## 💡 Use Cases
+## 📚 Documentation
 
-### For Developers
-- Build paid APIs
-- Monetize services
-- Test micropayments
-
-### For AI Researchers
-- Enable agent payments
-- Create agent marketplaces
-- Test economic models
-
-### For Businesses
-- Charge for compute
-- Implement pay-per-use
-- Create new revenue streams
+- [Build Instructions](./BUILD.md)
+- [Project Architecture](./PROJECT_TREE.txt)
+- [Complete README](./README.md)
 
 ---
-
-## 🚀 Production Deployment
-
-### Before Going Live
-
-1. ✅ Test thoroughly on testnet
-2. ✅ Set up Redis for storage
-3. ✅ Enable rate limiting
-4. ✅ Configure monitoring
-5. ✅ Security audit
-6. ✅ Load testing
-7. ✅ Backup strategy
-
-### Production Checklist
-
-- [ ] Real Kaspa mainnet testing
-- [ ] Redis configured
-- [ ] Rate limits set
-- [ ] Metrics monitored
-- [ ] Logs centralized
-- [ ] Backups automated
-- [ ] Incident response plan
-- [ ] Documentation updated
-
-See [IMPLEMENTATION_STATUS.md](./IMPLEMENTATION_STATUS.md) for details.
-
----
-
-## 🤝 Contributing
-
-We welcome contributions! See [CONTRIBUTING.md](./CONTRIBUTING.md) for guidelines.
-
----
-
-## 📊 Project Status
-
-**Status:** ✅ FEATURE COMPLETE - READY FOR TESTING
-
-- 5 packages built
-- 3 examples working
-- 100+ features implemented
-- 3000+ lines of documentation
-- ~80% production ready
-
-See [STATUS.md](./STATUS.md) for current status.
-
----
-
-## 🎉 You're Ready!
-
-You now have a complete, working system for autonomous agent-to-agent micropayments on Kaspa.
-
-**Happy coding!** 🚀
