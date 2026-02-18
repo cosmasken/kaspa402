@@ -18,7 +18,7 @@ Turn Kaspa into the payment layer of the internet. Autonomous agents discover se
 
 Watch autonomous agents execute real-time payments:
 
-[![asciicast](https://asciinema.org/a/kgm0LGQHL5NTZhIW.svg)](https://asciinema.org/a/kgm0LGQHL5NTZhIW)
+[![asciicast](https://asciinema.org/a/Ew6qguTD2fN5gbZN.svg)](https://asciinema.org/a/Ew6qguTD2fN5gbZN)
 
 ## 🛠️ Quick Start
 
